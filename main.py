@@ -34,7 +34,16 @@ class Book:
     def available(self):
         return self.__available
 
-    ...
+    # Text display function
+    def __str__(self):
+        return f'Title: {self.title}, Author: {self.author}, ' \
+               f'Isbn: {self.isbn}'
+
+    def borrow(self):
+        self.__available = False
+
+    def return_book(self):
+        self.__available = True
 
 
 # Definition of Member class
@@ -63,7 +72,17 @@ class Member:
     def borrower_books(self):
         return self.__borrowed_books
 
-    ...
+    # Text display function
+    def __str__(self):
+        return f'Name: {self.name}, Member ID: {self.member_id}'
+
+    def borrow_book(self, book: Book):
+        self.__borrowed_books.append(book)
+        book.borrow()
+
+    def return_book(self, book: Book):
+        self.__borrowed_books.remove(book)
+        book.return_book()
 
 
 # Definition of Library class
@@ -87,4 +106,44 @@ class Library:
     def members(self):
         return self.__members
 
-    ...
+    def add_book(self, book: Book):
+        self.__books.append(book)
+
+    def register_member(self, member: Member):
+        self.__members.append(member)
+
+    def issue_book(self, member_id, isbn):
+        this_member: Member = self.find_member(member_id)
+        this_book: Book = self.find_book(isbn)
+
+        if this_book.available is True:
+            this_member.borrow_book(this_book)
+        else:
+            print('This Book has borrowed')
+
+    def return_book(self, member_id, isbn):
+        this_member: Member = self.find_member(member_id)
+        this_book: Book = self.find_book(isbn)
+
+        if this_book.available is False:
+            this_member.return_book(this_book)
+        else:
+            print('This book is not on loan')
+
+    def find_member(self, member_id):
+        try:
+            for member in self.__members:
+                if member.member_id == member_id:
+                    return member
+            raise FileNotFoundError
+        except FileNotFoundError:
+            print('No such Member was found...')
+
+    def find_book(self, isbn):
+        try:
+            for book in self.__books:
+                if book.isbn == isbn:
+                    return book
+            raise FileNotFoundError
+        except FileNotFoundError:
+            print('No such Book was found')
