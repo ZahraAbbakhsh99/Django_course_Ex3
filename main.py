@@ -147,3 +147,63 @@ class Library:
             raise FileNotFoundError
         except FileNotFoundError:
             print('No such Book was found')
+
+
+# The list display function
+def print_list(list):
+    i = 1
+    for item in list:
+        print(f'item{i}: {item.__str__()}')
+        i += 1
+
+
+# Create an object from the Book
+book1 = Book('1984', 'George Orwell', '1234567890')
+print(f'Define a book with these info: {book1.__str__()}')
+print('---------------------------------------------------')
+
+# Create an object from the Book
+book2 = Book('To Kill a Mockingbird', 'Harper Lee', '0987654321')
+print(f'Define a book with these info: {book2.__str__()}')
+print('---------------------------------------------------')
+
+# Create an object from the Library
+library = Library()
+print(f'Define a library with {library.books} book and {library.members}member ')
+print('---------------------------------------------------')
+
+# Add a book to the Library Books
+library.add_book(book1)
+print(f'Add this book: {book1.__str__()} to the library')
+print(f'Library Books: ')
+print_list(library.books)
+print('---------------------------------------------------')
+
+# Add a book to the Library Books
+library.add_book(book2)
+print(f'Add this book: {book2.__str__()} to the library')
+print(f'Library Books: ')
+print_list(library.books)
+print('---------------------------------------------------')
+
+# Create an object from the Member class
+member = Member('Alis', 'M001')
+print(f'Define a member with these info: {member.__str__()}')
+print('---------------------------------------------------')
+
+# Registering a member and adding him/her to the Library Members
+library.register_member(member)
+print(f'Register this member: {member.__str__()} to the library')
+print(f'Library Members: ')
+print_list(library.members)
+print('---------------------------------------------------')
+
+# Borrowing books by member
+library.issue_book('M001', '1234567890')
+print('Borrowing a book with Isbn: 1234567890 by member with ID: M001')
+print('---------------------------------------------------')
+
+# Returning the book by the member
+library.return_book('M001', '1234567890')
+print('Returning a book with Isbn: 1234567890 by member with ID: M001')
+print('---------------------------------------------------')
