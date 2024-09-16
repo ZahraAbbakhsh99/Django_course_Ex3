@@ -17,6 +17,23 @@ class Book:
         except ValueError | TypeError:
             print('ERROR: Initialization Failed')
 
+    # Define getter function for attributes
+    @property
+    def title(self):
+        return self.__title
+
+    @property
+    def author(self):
+        return self.__author
+
+    @property
+    def isbn(self):
+        return self.__isbn
+
+    @property
+    def available(self):
+        return self.__available
+
     ...
 
 
@@ -33,6 +50,19 @@ class Member:
         except ValueError | TypeError:
             print('ERROR: Initialization Failed')
 
+    # Define getter function for attributes
+    @property
+    def name(self):
+        return self.__name
+
+    @property
+    def member_id(self):
+        return self.__member_id
+
+    @property
+    def borrower_books(self):
+        return self.__borrowed_books
+
     ...
 
 
@@ -47,3 +77,14 @@ class Library:
             self.__members = []
         except ValueError | TypeError:
             print('ERROR: Initialization Failed')
+
+    # Define getter function for attributes
+    @property
+    def books(self):
+        return self.__books
+
+    @property
+    def members(self):
+        return self.__members
+
+    ...
